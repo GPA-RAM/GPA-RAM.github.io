@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GPA-RAM</title>
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <script src="static/js/jquery.min.js"></script>
+</head>
+
+<body>
+
+  <section class="hero" style="background-color: #d4f4e1;">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title is-2">GPA-RAM: Grasp-Pretraining Augmented Robotic Attention Mamba for Spatial Task Learning
+        </h1>
+        <h2 class="subtitle is-4">Anonymous submission</h2>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="box">
+        <h2 class="title is-4">Abstract</h2>
+        <p>
+          Task failures in prior fine-grained robotic manipulation methods often stem from suboptimal initial grasping,
+          which is critical for subsequent manipulation and reducing complex pose adjustments. To address this, we
+          propose Grasp-Pretraining Augmentation (GPA)—a general learning framework that enhances grasp perception
+          without additional grasp pose data collection and labeling. GPA achieves evident enhancement on RLBench
+          multi-task benchmark (from 79.3% to 84.2%) and ALOHA bimanual manipulation tasks (from 86%/16% to 98%/38%).
+          Although GPA enhances fine-grained grasping performance by leveraging increased model capacity, it incurs high
+          computational latency, hindering real-time deployment. To mitigate this limitation, we introduce Robotic
+          Attention Mamba (RAM). This novel architecture synergizes attention mechanisms with state space models (SSMs),
+          effectively capturing complex spatial features while maintaining superior inference efficiency. We integrate
+          GPA and RAM into a unified framework, GPA-RAM, which balances model capacity with efficiency and applies to
+          both discrete and continuous action generation. GPA-RAM demonstrates superior performance across four robotic
+          systems with diverse camera configurations in both simulation and the real world. Compared with previous
+          state-of-the-art methods, it improves average success rates by 8.2% over RVT2 (from 79.3% to 87.5%) and 2.6%
+          over ARP+ (from 84.9% to 87.5%) on RLBench and 40% (from 16% to 56%), 12% (from 86% to 98%) on ALOHA tasks,
+          while maintaining high inference speed. Furthermore, sufficient experiments and ablations demonstrated that
+          GPA and RAM are both generic and applicable to different end-to-end network architectures and task settings.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container has-text-centered">
+      <figure class="image is-three-fifths is-inline-block">
+        <img src="static/images/framework.png" alt="Framework">
+        <figcaption class="has-text-centered has-text-weight-bold is-size-5 mt-2">Framework of GPA-RAM</figcaption>
+      </figure>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container">
+      <div class="columns is-vcentered">
+        <div class="column">
+          <figure class="image">
+            <img src="static/images/network.png" alt="Network">
+            <figcaption class="has-text-centered has-text-weight-bold is-size-5 mt-2">Architecture of GPA-RAM
+            </figcaption>
+          </figure>
+        </div>
+        <div class="column">
+          <figure class="image">
+
+            <img src="static/images/ACT_01.png" alt="ACT Architecture">
+            <figcaption class="has-text-centered has-text-weight-bold is-size-5 mt-2">Adapt GPA and One-Stage RAM to
+              Continuous Actions Generation.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container">
+        <h2 class="title is-4">Simulation Experiments</h2>
+
+        <div class="columns is-multiline">
+
+          <div class="column is-one-third">
+            <div class="content">
+              <div id="carousel-video-container-1">
+                <video id="carousel-video-player-1" controls autoplay muted loop width="100%">
+                  <source src="static/videos/sim/close_jar_success_0.mp4" type="video/mp4">
+                  <source src="static/videos/sim/insert_onto_square_peg_success_0.mp4" type="video/mp4">
+                  <source src="static/videos/sim/light_bulb_in_success_0.mp4" type="video/mp4">
+                  <source src="static/videos/sim/meat_off_grill_success_0.mp4" type="video/mp4">
+                  <source src="static/videos/sim/open_drawer_success_0.mp4" type="video/mp4">
+                  <source src="static/videos/sim/place_cups_success_0.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <div id="carousel-video-description-1" class="subtitle">
+                <p>Pull down six tasks.</p>
+              </div>
+              <div class="select is-rounded">
+                <select id="carousel-video-selector-1">
+                  <option value="0">Close Jar</option>
+                  <option value="1">Insert onto Square Peg</option>
+                  <option value="2">Light Bulb In</option>
+                  <option value="3">Meat off Grill</option>
+                  <option value="4">Open Drawer</option>
+                  <option value="5">Place Cups</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="column is-one-third">
+            <div class="content">
+              <div id="carousel-video-container-2">
+                <video id="carousel-video-player-2" controls autoplay muted loop width="100%">
+                  <source src="static/videos/sim/place_shape_in_shape_sorter_success_4.mp4" type="video/mp4">
+                  <source src="static/videos/sim/place_wine_at_rack_location_success_0.mp4" type="video/mp4">
+                  <source src="static/videos/sim/push_buttons_success_0.mp4" type="video/mp4">
+                  <source src="static/videos/sim/put_groceries_in_cupboard_success_0.mp4" type="video/mp4">
+                  <source src="static/videos/sim/put_item_in_drawer_success_0.mp4" type="video/mp4">
+                  <source src="static/videos/sim/put_money_in_safe_success_0.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <div id="carousel-video-description-2" class="subtitle">
+                <p>Pull down six tasks.</p>
+              </div>
+              <div class="select is-rounded">
+                <select id="carousel-video-selector-2">
+                  <option value="0">Place Shape in Shape Sorter</option>
+                  <option value="1">Place Wine at Rack Location</option>
+                  <option value="2">Push Buttons</option>
+                  <option value="3">Put Groceries in Cupboard</option>
+                  <option value="4">Put Item in Drawer</option>
+                  <option value="5">Put Money in Safe</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="column is-one-third">
+            <div class="content">
+              <div id="carousel-video-container-3">
+                <video id="carousel-video-player-3" controls autoplay muted loop width="100%">
+                  <source src="static/videos/sim/reach_and_drag_success_0.mp4" type="video/mp4">
+                  <source src="static/videos/sim/slide_block_to_color_target_success_0.mp4" type="video/mp4">
+                  <source src="static/videos/sim/stack_blocks_success_3.mp4" type="video/mp4">
+                  <source src="static/videos/sim/stack_cups_success_0.mp4" type="video/mp4">
+                  <source src="static/videos/sim/sweep_to_dustpan_of_size_success_0.mp4" type="video/mp4">
+                  <source src="static/videos/sim/turn_tap_success_1.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <div id="carousel-video-description-3" class="subtitle">
+                <p>Pull down six tasks.</p>
+              </div>
+              <div class="select is-rounded">
+                <select id="carousel-video-selector-3">
+                  <option value="0">Reach and Drag</option>
+                  <option value="1">Slide Block to Color Target</option>
+                  <option value="2">Stack Blocks</option>
+                  <option value="3">Stack Cups</option>
+                  <option value="4">Sweep to Dustpan</option>
+                  <option value="5">Turn Tap</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="column is-half">
+            <div class="content">
+              <div id="carousel-video-container-4">
+                <video id="carousel-video-player-4" controls autoplay muted loop width="100%">
+                  <source src="static/videos/aloha/insertion0.mp4" type="video/mp4">
+                  <source src="static/videos/aloha/insertion1.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <div id="carousel-video-description-4" class="subtitle">
+                <p>Aloha dataset.</p>
+              </div>
+              <div class="select is-rounded">
+                <select id="carousel-video-selector-4">
+                  <option value="0">Bimanual Insertion 1</option>
+                  <option value="1">Bimanual Insertion 2</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="column is-half">
+            <div class="content">
+              <div id="carousel-video-container-5">
+                <video id="carousel-video-player-5" controls autoplay muted loop width="100%">
+                  <source src="static/videos/aloha/transfer0.mp4" type="video/mp4">
+                  <source src="static/videos/aloha/transfer1.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <div id="carousel-video-description-5" class="subtitle">
+                <p>Aloha dataset.</p>
+              </div>
+              <div class="select is-rounded">
+                <select id="carousel-video-selector-5">
+                  <option value="0">Cube Transfer 1</option>
+                  <option value="1">Cube Transfer 2</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <h2 class="title is-4 has-text-centered">Real World Tasks</h2>
+      <div class="columns is-centered">
+
+        <div class="column is-one-third">
+          <div class="content has-text-centered">
+            <video controls autoplay muted loop width="100%">
+              <source src="static/videos/transfer.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p class="mt-2"><strong>[Transfer Plate]</strong></p>
+          </div>
+        </div>
+
+        <div class="column is-one-third">
+          <div class="content has-text-centered">
+            <video controls autoplay muted loop width="100%">
+              <source src="static/videos/clean.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p class="mt-2"><strong>[Tabletop Organization]</strong></p>
+          </div>
+        </div>
+
+        <div class="column is-one-third">
+          <div class="content has-text-centered">
+            <video controls autoplay muted loop width="100%">
+              <source src="static/videos/stack_bowl.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p class="mt-2"><strong>[Stack Bowl]</strong></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <section class="hero is-small is-light">
+    <div class="hero-body">
+      <div class="container">
+        <h2 class="title is-3">Real World Experiments</h2>
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-centered">
+              <div id="youtube-video-container">
+                <video id="youtube-video-player" controls autoplay muted loop width="100%">
+                  <source src="static/videos/transfer-1.mp4" type="video/mp4">
+                  <source src="static/videos/transfer-2.mp4" type="video/mp4">
+                  <source src="static/videos/transfer-3.mp4" type="video/mp4">
+                  <source src="static/videos/transfer-4.mp4" type="video/mp4">
+                  <source src="static/videos/transfer-5.mp4" type="video/mp4">
+                  <source src="static/videos/transfer-6.mp4" type="video/mp4">
+                  <source src="static/videos/transfer-7.mp4" type="video/mp4">
+                  <source src="static/videos/transfer-8.mp4" type="video/mp4">
+                  <source src="static/videos/insert-1.mp4" type="video/mp4">
+                  <source src="static/videos/insert-2.mp4" type="video/mp4">
+                  <source src="static/videos/insert-3.mp4" type="video/mp4">
+                  <source src="static/videos/insert-4.mp4" type="video/mp4">
+                  <source src="static/videos/insert-5.mp4" type="video/mp4">
+                  <source src="static/videos/draw-1.mp4" type="video/mp4">
+                  <source src="static/videos/draw-2.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+
+              <div id="youtube-video-description" class="subtitle">
+                <p>Different real world tasks results.</p>
+              </div>
+
+              <div class="select is-rounded">
+                <select id="youtube-video-selector">
+                  <option value="1">Put item into draw</option>
+                  <option value="2">Put item into draw</option>
+                  <option value="3">Put item into draw</option>
+                  <option value="4">Put item into draw</option>
+                  <option value="5">Put item into draw</option>
+                  <option value="6">Put item into draw</option>
+                  <option value="7">Put item into draw</option>
+                  <option value="8">Put item into draw</option>
+                  <option value="9">Insert the circular hole onto the shaft</option>
+                  <option value="10">Insert the circular hole onto the shaft</option>
+                  <option value="11">Insert the circular hole onto the shaft</option>
+                  <option value="12">Insert the square hole onto the shaft</option>
+                  <option value="13">Insert the square hole onto the shaft</option>
+                  <option value="14">Put item into the middle cabinet</option>
+                  <option value="15">Put item into the top cabinet</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    $(document).ready(function () {
+      // 定义每个小窗口的视频选项
+      const carouselVideos = {
+        1: [
+          { src: 'static/videos/sim/close_jar_success_0.mp4', description: 'Close Jar: close the red jar.' },
+          { src: 'static/videos/sim/insert_onto_square_peg_success_0.mp4', description: 'Insert onto Square Peg: put the ring on the azure spoke.' },
+          { src: 'static/videos/sim/light_bulb_in_success_0.mp4', description: 'Light Bulb In: screw in the silver light bulb.' },
+          { src: 'static/videos/sim/meat_off_grill_success_0.mp4', description: 'Meat off Grill: take the steak off the grill.' },
+          { src: 'static/videos/sim/open_drawer_success_0.mp4', description: 'Open Drawer: open the top drawer.' },
+          { src: 'static/videos/sim/place_cups_success_0.mp4', description: 'Place Cups: place 3 cups on the cup holder.' }
+        ],
+        2: [
+          { src: 'static/videos/sim/place_shape_in_shape_sorter_success_1.mp4', description: 'Place Shape in Shape Sorter: put the moon in the shape sorter.' },
+          { src: 'static/videos/sim/place_wine_at_rack_location_success_0.mp4', description: 'Place Wine at Rack Location: stack the wine bottle to the left of the rack.' },
+          { src: 'static/videos/sim/push_buttons_success_0.mp4', description: 'Push Buttons: push the maroon button.' },
+          { src: 'static/videos/sim/put_groceries_in_cupboard_success_0.mp4', description: 'Put Groceries in Cupboard: put the coffee in the cupboard.' },
+          { src: 'static/videos/sim/put_item_in_drawer_success_0.mp4', description: 'Put Item in Drawer: put the item in the top drawer.' },
+          { src: 'static/videos/sim/put_money_in_safe_success_0.mp4', description: 'Put Money in Safe: put the money away in the safe on the top shelf.' }
+        ],
+        3: [
+          { src: 'static/videos/sim/reach_and_drag_success_0.mp4', description: 'Reach and Drag: use the stick to drag the cube onto the navy target.' },
+          { src: 'static/videos/sim/slide_block_to_color_target_success_0.mp4', description: 'Slide Block to Color Target: slide the block to pink target.' },
+          { src: 'static/videos/sim/stack_blocks_success_3.mp4', description: 'Stack Blocks: stack 3 gray blocks.' },
+          { src: "static/videos/sim/stack_cups_success_0.mp4", description: 'Stack Cups: stack the other cups on top of the maroon cup.' },
+          { src: 'static/videos/sim/sweep_to_dustpan_of_size_success_0.mp4', description: 'Sweep to Dustpan: sweep dirt to the short dustpan.' },
+          { src: 'static/videos/sim/turn_tap_success_1.mp4', description: 'Turn Tap: turn right tap.' }
+        ],
+        4: [
+          { src: 'static/videos/aloha/insertion0.mp4', description: 'Bimanual Insertion 1: inserting the object with both hands.' },
+          { src: 'static/videos/aloha/insertion1.mp4', description: 'Bimanual Insertion 2: another type of bimanual insertion.' }
+        ],
+        5: [
+          { src: 'static/videos/aloha/transfer0.mp4', description: 'Cube Transfer 1: transferring the cube to the shelf.' },
+          { src: "static/videos/aloha/transfer1.mp4", description: 'Cube Transfer 2: transferring the cube to the storage container.' }
+        ]
+      };
+
+      // YouTube视频选项
+      const youtubeVideos = {
+        1: { src: 'static/videos/transfer-1.mp4', description: 'Put item into draw video 1.' },
+        2: { src: 'static/videos/transfer-2.mp4', description: 'Put item into draw video 2.' },
+        3: { src: 'static/videos/transfer-3.mp4', description: 'Put item into draw video 3.' },
+        4: { src: 'static/videos/transfer-4.mp4', description: 'Put item into draw video 4.' },
+        5: { src: 'static/videos/transfer-5.mp4', description: 'Put item into draw video 5.' },
+        6: { src: 'static/videos/transfer-6.mp4', description: 'Put item into draw video 6.' },
+        7: { src: 'static/videos/transfer-7.mp4', description: 'Put item into draw video 7.' },
+        8: { src: 'static/videos/transfer-8.mp4', description: 'Put item into draw video 8.' },
+        9: { src: 'static/videos/insert-1.mp4', description: 'Insert the circular hole into the shaft.' },
+        10: { src: 'static/videos/insert-2.mp4', description: 'Insert the circular hole into the shaft.' },
+        11: { src: 'static/videos/insert-3.mp4', description: 'Insert the circular hole into the shaft.' },
+        12: { src: 'static/videos/insert-4.mp4', description: 'Insert the square hole onto the shaft.' },
+        13: { src: 'static/videos/insert-5.mp4', description: 'Insert the square hole onto the shaft.' },
+        14: { src: 'static/videos/draw-1.mp4', description: 'Put item into the middle cabinet.' },
+        15: { src: 'static/videos/draw-2.mp4', description: 'Put item into the top cabinet.' }
+      };
+
+      // 更新视频和描述的函数
+      function updateVideo(selector, videoData, videoType, videoIndex) {
+        const selectedVideo = $(selector).val();
+        const video = videoData[videoIndex][selectedVideo];
+
+        $(`#${videoType}-video-player-${videoIndex}`).attr('src', video.src);
+        $(`#${videoType}-video-description-${videoIndex}`).html(`<p>${video.description}</p>`);
+
+        $(`#${videoType}-video-player-${videoIndex}`)[0].load();
+      }
+
+      // 为 YouTube视频选择器添加事件监听器
+      $('#youtube-video-selector').change(function () {
+        const selectedVideo = $(this).val();
+        const video = youtubeVideos[selectedVideo];
+
+        // 更新视频的源和描述
+        $('#youtube-video-player').attr('src', video.src);
+        $('#youtube-video-description').html(`<p>${video.description}</p>`);
+
+        // 重新加载视频
+        $('#youtube-video-player')[0].load();
+      });
+
+      // 监听视频选择变化
+      $('#carousel-video-selector-1').change(function () {
+        updateVideo('#carousel-video-selector-1', carouselVideos, 'carousel', 1);
+      });
+
+      $('#carousel-video-selector-2').change(function () {
+        updateVideo('#carousel-video-selector-2', carouselVideos, 'carousel', 2);
+      });
+
+      $('#carousel-video-selector-3').change(function () {
+        updateVideo('#carousel-video-selector-3', carouselVideos, 'carousel', 3);
+      });
+      // 新增事件监听器: 第四个视频选择器
+      $('#carousel-video-selector-4').change(function () {
+        updateVideo('#carousel-video-selector-4', carouselVideos, 'carousel', 4);
+      });
+
+      // 新增事件监听器: 第五个视频选择器
+      $('#carousel-video-selector-5').change(function () {
+        updateVideo('#carousel-video-selector-5', carouselVideos, 'carousel', 5);
+      });
+    });
+  </script>
+
+</body>
+
+</html>
