@@ -11,7 +11,7 @@
     content="A unified framework for precise, real-time discrete and continuous robotic manipulation.">
   <meta property="og:type" content="website">
   <title>GPA-RAM | Grasp-Pretraining Augmented Robotic Attention Mamba</title>
-  <link rel="icon" href="static/images/peking2.png" type="image/png">
+  <link rel="icon" href="static/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/index.css">
 </head>
@@ -24,40 +24,28 @@
         <a href="#method">Method</a>
         <a href="#experiments">Experiments</a>
         <a href="#real-world">Real World</a>
-        <a href="#citation">Citation</a>
       </div>
     </nav>
 
     <section id="top" class="hero publication-hero">
       <div class="hero-body">
         <div class="container is-max-desktop has-text-centered">
-          <p class="venue-label">Submitted manuscript · IEEE/ASME Transactions on Mechatronics</p>
+          <p class="venue-label">Anonymous project page · Under review</p>
           <h1 class="title publication-title">
             GPA-RAM: Grasp-Pretraining Augmented Robotic Attention Mamba for Spatial Task Learning
           </h1>
 
           <div class="publication-authors" aria-label="Authors">
-            <span class="author-block">Juyi Sheng<sup>1,*</sup></span>
-            <span class="author-block">Yangjun Liu<sup>2,*</sup></span>
-            <span class="author-block">Sheng Xu<sup>3</sup></span>
-            <span class="author-block">Zhixin Yang<sup>2</sup></span>
-            <span class="author-block">Tiantian Xu<sup>3</sup></span>
-            <span class="author-block"><a href="mailto:liumengyuan@pku.edu.cn">Mengyuan Liu</a><sup>1,†</sup></span>
+            <span class="author-block">Anonymous Authors</span>
           </div>
 
           <div class="affiliations">
-            <p><sup>1</sup> State Key Laboratory of General Artificial Intelligence, Peking University, Shenzhen Graduate School</p>
-            <p><sup>2</sup> State Key Laboratory of Internet of Things for Smart City, University of Macau</p>
-            <p><sup>3</sup> Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences</p>
-            <p class="author-notes"><sup>*</sup> Equal contribution &nbsp;&nbsp; <sup>†</sup> Corresponding author</p>
+            <p>Author names and affiliations are withheld for anonymous review.</p>
           </div>
 
           <div class="publication-links">
-            <a class="button is-dark is-rounded" href="https://arxiv.org/abs/2504.19683" target="_blank" rel="noopener">
-              <span>arXiv</span>
-            </a>
-            <a class="button is-light is-rounded" href="https://github.com/GPA-RAM/GPA-RAM" target="_blank" rel="noopener">
-              <span>Code</span>
+            <a class="button is-dark is-rounded" href="https://anonymous.4open.science/r/GPA-RAM/" target="_blank" rel="noopener noreferrer">
+              <span>Anonymous Code</span>
             </a>
           </div>
         </div>
@@ -386,25 +374,6 @@
       </div>
     </section>
 
-    <section class="section citation-section" id="citation">
-      <div class="container is-max-desktop">
-        <div class="section-heading">
-          <p class="eyebrow">Reference</p>
-          <h2 class="title is-3">Citation</h2>
-        </div>
-        <div class="citation-card">
-          <button id="copy-citation" class="copy-button" type="button">Copy BibTeX</button>
-          <pre><code id="bibtex">@misc{sheng2025gparam,
-  title         = {GPA-RAM: Grasp-Pretraining Augmented Robotic Attention Mamba for Spatial Task Learning},
-  author        = {Sheng, Juyi and Liu, Yangjun and Xu, Sheng and Yang, Zhixin and Xu, Tiantian and Liu, Mengyuan},
-  year          = {2025},
-  eprint        = {2504.19683},
-  archivePrefix = {arXiv},
-  url           = {https://arxiv.org/abs/2504.19683}
-}</code></pre>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer class="footer site-footer">
@@ -430,18 +399,6 @@
           description.textContent = option.dataset.description || option.textContent;
         }
       });
-    });
-
-    const copyButton = document.getElementById('copy-citation');
-    copyButton.addEventListener('click', async () => {
-      const citation = document.getElementById('bibtex').textContent;
-      try {
-        await navigator.clipboard.writeText(citation);
-        copyButton.textContent = 'Copied';
-        window.setTimeout(() => { copyButton.textContent = 'Copy BibTeX'; }, 1600);
-      } catch (error) {
-        copyButton.textContent = 'Select and copy';
-      }
     });
   </script>
 </body>
