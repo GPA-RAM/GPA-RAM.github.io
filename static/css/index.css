@@ -167,6 +167,29 @@ sup {
   z-index: 2;
 }
 
+.supplementary-video-section {
+  padding-bottom: 2rem;
+  padding-top: 3.5rem;
+}
+
+.supplementary-video-card {
+  background: #0b1510;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+  margin: 0 auto;
+  max-width: 1180px;
+  overflow: hidden;
+}
+
+.supplementary-video-card video {
+  background: #0b1510;
+  display: block;
+  max-height: 78vh;
+  object-fit: contain;
+  width: 100%;
+}
+
 .metrics-grid {
   display: grid;
   gap: 1rem;
